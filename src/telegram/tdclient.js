@@ -57,6 +57,9 @@ class TdLibController {
               case 'authorizationStateWaitEncryptionKey':
                 this.send({ '@type': 'checkDatabaseEncryptionKey' });
                 break;
+              case 'authorizationStateReady':
+                console.log('AUTHHHHHHHHHHHHHHHH')
+                break
             }
           }
         }

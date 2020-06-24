@@ -2,7 +2,7 @@
   <div class="login">
     <el-row :gutter="20">
       <el-col :span="8" :offset="8">
-        <el-form>
+        <el-form v-if="step === 'enterphone'">
           <el-form-item label="Số điện thoại">
             <el-input v-model="phone" />
           </el-form-item>
@@ -10,6 +10,17 @@
           <el-form-item>
             <el-button type="primary" size="medium" @click="handleLogin">
               Đăng nhập
+            </el-button>
+          </el-form-item>
+        </el-form>
+        <el-form v-if="step === 'entercode'">
+          <el-form-item label="Mã xác nhận">
+            <el-input v-model="verificationCode" />
+          </el-form-item>
+
+          <el-form-item>
+            <el-button type="primary" size="medium" @click="handleVerificationCode">
+              Xác nhận
             </el-button>
           </el-form-item>
         </el-form>
@@ -26,8 +37,10 @@ export default {
   props: {},
   data() {
     return {
+      step: 'enterphone',
       countryCode: '+84',
-      phone: '+84'
+      phone: '+84',
+      verificationCode: ''
     }
   },
   created() {
@@ -45,11 +58,31 @@ export default {
           '@type': 'setAuthenticationPhoneNumber',
           phone_number: this.phone
         })
-        .then(result => {
-          console.log(result)
+        .then(() => {
+          this.step = 'entercode'
         })
         .catch (error => {
-          console.log(error)
+          this.$message({
+            message: error.mesage || error,
+            type: 'error'
+          })
+        })
+    },
+
+    handleVerificationCode() {
+      TdLibController
+        .send({
+          '@type': 'checkAuthenticationCode',
+          code: this.verificationCode
+        })
+        .then(() => {
+          console.log('success')
+        })
+        .catch(error => {
+          this.$message({
+            message: error.mesage || error,
+            type: 'error'
+          })
         })
     },
 

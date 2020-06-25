@@ -8029,10 +8029,10 @@ vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-telegram-plugin@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/vue-telegram-plugin/-/vue-telegram-plugin-0.1.0.tgz#f93fb7b2e9ea8321f99b37f742260e0ab544cbe9"
-  integrity sha512-zP8YCCMnVMor9oAfe99R9s7x5bdoL8uosy93sB5w/3xdGlWgs9Cz5bvsMfdL6ImYtIas5PfDeuoHXoePZ5EfVQ==
+vue-telegram-plugin@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/vue-telegram-plugin/-/vue-telegram-plugin-0.1.1.tgz#b29de6959b1182278909a7e4060f0755d75fdc3d"
+  integrity sha512-ooXh07Pl7kAfDcQpRINRXsvgqDkXc8VIaqXlvNm56FFWvanPpIt132iLFl0IBLhmZbnrfCwIuNZs9dKUbcg16w==
 
 vue-template-compiler@^2.6.11:
   version "2.6.11"

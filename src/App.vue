@@ -1,33 +1,14 @@
 <template>
-  <div id="app">
-    <login />
+  <div id="vue-telegram">
+    <VueTelegramAuth />
   </div>
 </template>
 
 <script>
-import Login from './components/Login'
 
 export default {
-  name: 'App',
-  components: {
-    Login
-  },
-  props: {
-    TdLibController: {
-      type: [Object, Function],
-      default: null
-    }
-  },
-  data() {
-    return {
-      status: 'authSuccess',
-      phone: '+84'
-    }
-  },
+  name: 'VueTelegram',
   methods: {
   }
 }
 </script>
-
-<style>
-</style>

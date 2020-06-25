@@ -29,8 +29,27 @@
             <code>{{ user.id }} - {{ user.phone_number }} - {{ user.first_name }} {{ user.last_name }} </code>
           </div>
           <div>
-            <code>{{ contacts }}</code>
+            <el-select
+              v-model="chatId"
+            >
+              <el-option
+                v-for="item in chats"
+                :key="item.id"
+                :label="item.title"
+                :value="item.id"
+              />
+            </el-select>
           </div>
+          <el-form>
+            <el-form-item label="Message">
+              <el-input v-model="message" type="textarea"/>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" size="medium" @click="handleSendMessage">
+                Gửi
+              </el-button>
+            </el-form-item>
+          </el-form>
         </div>
       </el-col>
     </el-row>
@@ -50,13 +69,16 @@ export default {
       phone: '+84',
       verificationCode: '',
       user: '',
-      contacts: ''
+      contacts: '',
+      chats: {},
+      chatId: '',
+      message: ''
     }
   },
   created() {
     TdLibController.init({
       onUpdate: update => {
-        console.log('Update: ', update)
+        // console.log('Update: ', update)
         switch (update['@type']) {
           case 'updateAuthorizationState':
             switch (update.authorization_state['@type']) {
@@ -65,13 +87,15 @@ export default {
                 break
               case 'authorizationStateWaitEncryptionKey':
                 TdLibController.send({ '@type': 'checkDatabaseEncryptionKey' });
-                break;
+                break
+              case 'authorizationStateReady':
+                this.step = 'sendmessage'
+                this.getMe()
+                this.getChats()
+                break
             }
             break
           case 'updateUser':
-            this.step = 'sendmessage'
-            this.user = update.user
-            this.getContacts()
             break
         }
       }
@@ -79,10 +103,55 @@ export default {
 
   },
   methods: {
-    async getContacts() {
-      this.contacts = await TdLibController.send({
-        '@type': 'getContacts'
+    async getMe() {
+      const user = await TdLibController.send({
+        '@type': 'getMe'
       })
+      this.$set(this, 'user', user)
+    },
+
+    async getChats() {
+      const chatList = await TdLibController.send({
+        '@type': 'searchChatsOnServer',
+        query: 'MANTIS',
+        limit: 20
+      })
+
+      for (const chatId of chatList.chat_ids) {
+        const chatInfo = await TdLibController.send({
+          '@type': 'getChat',
+          chat_id: chatId
+        })
+        this.$set(this.chats, chatId, {
+          id: chatInfo.id,
+          type: chatInfo.type,
+          title: chatInfo.title,
+          permissions: chatInfo.permissions
+        })
+      }
+    },
+
+    handleSendMessage() {
+      TdLibController
+        .send({
+          '@type': 'sendMessage',
+          chat_id: this.chatId,
+          input_message_content: {
+            '@type': 'inputMessageText',
+            text: {
+              '@type': 'formattedText',
+              text: this.message
+            },
+            disable_web_page_preview: false,
+            clear_draft: true
+          }
+        })
+        .then(() => {
+          console.log('sendMessageSuccess')
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
 
     handleLogin() {

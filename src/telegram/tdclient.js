@@ -26,7 +26,7 @@ class TdLibController {
     this.disableLog = true
   }
 
-  init = () => {
+  init = ({ onUpdate }) => {
     const {
       verbosity,
       jsVerbosity,
@@ -45,25 +45,7 @@ class TdLibController {
       isBackground: false,
       useDatabase: useDatabase,
       wasmUrl: `${WASM_FILE_NAME}?_sw-precache=${WASM_FILE_HASH}`,
-      onUpdate: (update) => {
-        console.log('Update: ', update)
-        switch (update['@type']) {
-          case 'updateAuthorizationState': {
-
-            switch (update.authorization_state['@type']) {
-              case 'authorizationStateWaitTdlibParameters':
-                this.sendTdParameters()
-                break
-              case 'authorizationStateWaitEncryptionKey':
-                this.send({ '@type': 'checkDatabaseEncryptionKey' });
-                break;
-              case 'authorizationStateReady':
-                console.log('AUTHHHHHHHHHHHHHHHH')
-                break
-            }
-          }
-        }
-      }
+      onUpdate
     }
 
     this.client = new TdClient(options)

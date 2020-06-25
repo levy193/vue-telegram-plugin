@@ -1,27 +1,33 @@
 <template>
   <div id="app">
-    <Login />
+    <login />
   </div>
 </template>
 
 <script>
-import Login from './components/Login.vue'
+import Login from './components/Login'
 
 export default {
   name: 'App',
   components: {
     Login
+  },
+  props: {
+    TdLibController: {
+      type: [Object, Function],
+      default: null
+    }
+  },
+  data() {
+    return {
+      status: 'authSuccess',
+      phone: '+84'
+    }
+  },
+  methods: {
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>

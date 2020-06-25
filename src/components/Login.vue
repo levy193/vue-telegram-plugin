@@ -24,6 +24,14 @@
             </el-button>
           </el-form-item>
         </el-form>
+        <div class="send-message" v-if="step === 'sendmessage'">
+          <div>
+            <code>{{ user.id }} - {{ user.phone_number }} - {{ user.first_name }} {{ user.last_name }} </code>
+          </div>
+          <div>
+            <code>{{ contacts }}</code>
+          </div>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -40,14 +48,43 @@ export default {
       step: 'enterphone',
       countryCode: '+84',
       phone: '+84',
-      verificationCode: ''
+      verificationCode: '',
+      user: '',
+      contacts: ''
     }
   },
   created() {
-    TdLibController.init()
+    TdLibController.init({
+      onUpdate: update => {
+        console.log('Update: ', update)
+        switch (update['@type']) {
+          case 'updateAuthorizationState':
+            switch (update.authorization_state['@type']) {
+              case 'authorizationStateWaitTdlibParameters':
+                TdLibController.sendTdParameters()
+                break
+              case 'authorizationStateWaitEncryptionKey':
+                TdLibController.send({ '@type': 'checkDatabaseEncryptionKey' });
+                break;
+            }
+            break
+          case 'updateUser':
+            this.step = 'sendmessage'
+            this.user = update.user
+            this.getContacts()
+            break
+        }
+      }
+    })
 
   },
   methods: {
+    async getContacts() {
+      this.contacts = await TdLibController.send({
+        '@type': 'getContacts'
+      })
+    },
+
     handleLogin() {
       if (!this.isValidPhoneNumber(this.phone)) {
         return
@@ -77,6 +114,7 @@ export default {
         })
         .then(() => {
           console.log('success')
+          this.step = 'sendmessage'
         })
         .catch(error => {
           this.$message({

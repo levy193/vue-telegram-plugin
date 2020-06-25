@@ -7510,7 +7510,7 @@ tapable@^1.0.0, tapable@^1.1.3:
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-1.1.3.tgz#a1fccc06b58db61fd7a45da2da44f5f3a3e67ba2"
   integrity sha512-4WK/bYZmj8xLr+HUCODHGF1ZFzsYffasLUgEiMBY4fgtltdO6B4WJtlSbPaDTLpYTcGVwM2qLnFTICEcNxs3kA==
 
-tdweb@^1.6.6:
+tdweb@1.6.6:
   version "1.6.6"
   resolved "https://registry.yarnpkg.com/tdweb/-/tdweb-1.6.6.tgz#081f863fca7b7ce18b1e0150e7d931e913e88a1c"
   integrity sha512-BLDu6BYBYiseNIZevxUpoTwWw5krs+Vr1RPSJdgLqsK4Xf9a1N+/goXp23E/bRQTLK7g9YLNoPgk7+w1+MAg7A==

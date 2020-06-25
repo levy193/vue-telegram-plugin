@@ -10,7 +10,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
-    "tdweb": "^1.6.6",
+    "tdweb": "1.6.6",
     "vue": "^2.6.11"
   },
   "devDependencies": {

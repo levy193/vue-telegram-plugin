@@ -30,7 +30,7 @@ class TdLibController {
     this.chats = null
   }
 
-  init = ({ onUpdate }) => {
+  init({ onUpdate }) {
     const {
       logVerbosityLevel,
       jsLogVerbosityLevel,
@@ -58,7 +58,7 @@ class TdLibController {
     this.hasInit = true
   }
 
-  send = request => {
+  send(request) {
     if (!this.client) {
       return console.error('[VUE_TELEGRAM] Client is not initialized (Call init method first)!', request)
     }
@@ -66,7 +66,7 @@ class TdLibController {
     return this.client.send(request)
   }
 
-  sendTdParameters = async () => {
+  async sendTdParameters() {
     const apiId = this.options.apiId;
     const apiHash = this.options.apiHash;
 

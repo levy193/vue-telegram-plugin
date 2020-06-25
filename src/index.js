@@ -15,7 +15,7 @@ const VueTelegram = {
     /**
      * Tdlib controller
      */
-    const tdController = new TdControllerLib(options, eventBus)
+    const tdController = new TdControllerLib(options)
 
     Vue.prototype.$vTelegram = {
       init: () => {

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import VueTelegram from '../src/index'
+import VueTelegram from 'vue-telegram-plugin'
 
 Vue.config.productionTip = false
 

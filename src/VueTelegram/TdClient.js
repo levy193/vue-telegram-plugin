@@ -3,7 +3,7 @@ import TdClient from 'tdweb/dist/tdweb'
 import {
   getBrowser,
   getOSName
-} from '../utils/util'
+} from './util'
 
 class TdLibController {
   constructor(options) {
@@ -26,6 +26,8 @@ class TdLibController {
 
     this.hasInit = false
     this.isAuthenticated = false
+    this.user = null
+    this.chats = null
   }
 
   init = ({ onUpdate }) => {
@@ -94,7 +96,7 @@ class TdLibController {
     })
   }
 
-  logOut() {
+  logout() {
     this.send({ '@type': 'logOut' })
       .then(() => {
         this,this.isAuthenticated = false
@@ -102,6 +104,10 @@ class TdLibController {
       .catch(error => {
         console.error('[VUE_TELEGRAM] Logout error: ', error);
       })
+  }
+
+  update(key, value) {
+    this[key] = value
   }
 }
 

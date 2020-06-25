@@ -1,19 +1,19 @@
 {
-  "name": "telegram-js",
+  "name": "VueTelegram",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test": "vue-cli-service serve ./test"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
     "tdweb": "1.6.6",
-    "vue": "^2.6.11"
-  },
-  "devDependencies": {
+    "vue": "^2.6.11",
     "@vue/cli-plugin-babel": "~4.4.0",
     "@vue/cli-plugin-eslint": "~4.4.0",
     "@vue/cli-service": "~4.4.0",

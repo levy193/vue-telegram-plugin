@@ -17,12 +17,15 @@ class TdLibController {
       mode: 'wasm', // 'wasm-streaming'/'wasm'/'asmjs'
       wasmUrl: `a848b8b40a9281225b96b8d300a07767.wasm?_sw-precache=a848b8b40a9281225b96b8d300a07767`,
       apiId: '1497957',
-      apiHash: '178cf1000113c595e64ab1513dc687c4'
+      apiHash: '178cf1000113c595e64ab1513dc687c4',
+      system_language_code: 'en',
+      database_directory: '/telegramdb'
     }, options)
 
     this.disableLog = true
 
     this.hasInit = false
+    this.isAuthenticated = false
   }
 
   init = ({ onUpdate }) => {
@@ -55,8 +58,7 @@ class TdLibController {
 
   send = request => {
     if (!this.client) {
-      console.error('[VUE_TELEGRAM] Client is not initialized (Call init method first)!', request)
-      return;
+      return console.error('[VUE_TELEGRAM] Client is not initialized (Call init method first)!', request)
     }
 
     return this.client.send(request)
@@ -67,8 +69,7 @@ class TdLibController {
     const apiHash = this.options.apiHash;
 
     if (!apiId || !apiHash) {
-      console.error('[VUE_TELEGRAM] API id is missing!')
-      return
+      return console.error('[VUE_TELEGRAM] API id is missing!')
     }
 
     const { useTestDC } = this.options;
@@ -80,23 +81,27 @@ class TdLibController {
         use_test_dc: useTestDC,
         api_id: apiId,
         api_hash: apiHash,
-        system_language_code: navigator.language || 'en',
+        system_language_code: this.options.system_language_code || 'en',
         device_model: getBrowser(),
         system_version: getOSName(),
         use_secret_chats: false,
         use_message_database: true,
         application_version: '1.0.0',
         use_file_database: false,
-        database_directory: '/db',
+        database_directory: this.options.database_directory || '/telegramdb',
         files_directory: '/'
       }
     })
   }
 
   logOut() {
-    this.send({ '@type': 'logOut' }).catch(error => {
-      console.error('[VUE_TELEGRAM] Logout error: ', error);
-    })
+    this.send({ '@type': 'logOut' })
+      .then(() => {
+        this,this.isAuthenticated = false
+      })
+      .catch(error => {
+        console.error('[VUE_TELEGRAM] Logout error: ', error);
+      })
   }
 }
 

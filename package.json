@@ -1,7 +1,9 @@
 {
-  "name": "VueTelegram",
+  "name": "vue-telegram",
   "version": "0.1.0",
   "private": true,
+  "author": "levy193 <quangdong.luu@gmail.com>",
+  "repository": "https://github.com/levy193/vue-telegram.git",
   "scripts": {
     "test": "vue-cli-service serve ./test"
   },

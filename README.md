@@ -69,7 +69,7 @@ Events that are emmited on the vue `$vTelegramBus` instance (Event Bus).
 
 ```javascript
 // Listening an event.
-Vue.$vTelegramBus.on(event', () => {})
+Vue.$vTelegramBus.on(event, () => {})
 
 // Remove one or move event.
 Vue.$vTelegramBus.off(event, () => {})

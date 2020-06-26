@@ -1,6 +1,6 @@
 <h1 align="center"><b>Vue Telegram Plugin</b></h1>
 <h4 align="center">A plugin for Vue support authorize and send message in telegram</h4>
-<h5 align="center">99% size of project is tdweb library.</h5>
+<h5 align="center">No dependencies, just <a href="https://www.npmjs.com/package/tdweb">tdweb</a>(99% size)</h5>
 
 ## Installation
 ```bash
@@ -14,7 +14,7 @@ npm install vue-telegram-plugin
 ## Usage
 
 ### Prepare tdweb library
-This plugin using <a href="https://www.npmjs.com/package/tdweb">tdweb</a> (TDLib in browser), so after installing you have to make all tdweb's files loadable from your server. For example you can copy all file in `vue-telegram-plugin/lib` folder into the server's `public` folder.
+This plugin using <a href="https://www.npmjs.com/package/tdweb">tdweb</a> (Telegram Data Libraty - TDLib in browser), so after installing you have to make all tdweb's files loadable from your server. For example you can copy all file in `vue-telegram-plugin/lib` folder into the server's `public` folder.
 
 ```bash
 cp -r node_modules/vue-telegram-plugin/lib/* public/

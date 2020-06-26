@@ -50,20 +50,19 @@ const VueTelegram = {
         tdController.update('hasInit', true)
       },
 
-      sendMessage({ chatId, message }) {
+      login(phoneNumber) {
         return tdController
           .send({
-            '@type': 'sendMessage',
-            chat_id: chatId,
-            input_message_content: {
-              '@type': 'inputMessageText',
-              text: {
-                '@type': 'formattedText',
-                text: message
-              },
-              disable_web_page_preview: false,
-              clear_draft: true
-            }
+            '@type': 'setAuthenticationPhoneNumber',
+            phone_number: phoneNumber
+          })
+      },
+
+      confirmVerificationCode(verificationCode) {
+        return tdController
+          .send({
+            '@type': 'checkAuthenticationCode',
+            code: verificationCode
           })
       },
 
@@ -77,7 +76,7 @@ const VueTelegram = {
         return user
       },
 
-      async getChats({ query, limit }) {
+      async searchChats({ query, limit }) {
         const chats = {}
 
         const chatList = await tdController.send({
@@ -105,19 +104,20 @@ const VueTelegram = {
         return chats
       },
 
-      login(phoneNumber) {
+      sendMessage({ chatId, message }) {
         return tdController
           .send({
-            '@type': 'setAuthenticationPhoneNumber',
-            phone_number: phoneNumber
-          })
-      },
-
-      confirmVerificationCode(verificationCode) {
-        return tdController
-          .send({
-            '@type': 'checkAuthenticationCode',
-            code: verificationCode
+            '@type': 'sendMessage',
+            chat_id: chatId,
+            input_message_content: {
+              '@type': 'inputMessageText',
+              text: {
+                '@type': 'formattedText',
+                text: message
+              },
+              disable_web_page_preview: false,
+              clear_draft: true
+            }
           })
       },
 

@@ -5,6 +5,10 @@ import {
   getOSName
 } from './util'
 
+const requiredOptions = [
+  'apiId', 'apiHash'
+]
+
 class TdLibController {
   constructor(options) {
     this.options = Object.assign({
@@ -16,11 +20,17 @@ class TdLibController {
       useDatabase: false,
       mode: 'wasm', // 'wasm-streaming'/'wasm'/'asmjs'
       wasmUrl: `a848b8b40a9281225b96b8d300a07767.wasm?_sw-precache=a848b8b40a9281225b96b8d300a07767`,
-      apiId: '1497957',
-      apiHash: '178cf1000113c595e64ab1513dc687c4',
+      apiId: '',
+      apiHash: '',
       system_language_code: 'en',
       database_directory: '/telegramdb'
     }, options)
+
+    requiredOptions.forEach(requiredOption => {
+      if (!this.options[requiredOption] || this.options[requiredOption] == '') {
+        throw new Error(`${requiredOption} is required!`)
+      }
+    })
 
     this.disableLog = true
 

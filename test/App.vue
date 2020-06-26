@@ -45,7 +45,7 @@ export default {
 
     this.$vTelegramBus.on('authorizationStateReady', async () => {
       this.user = await this.$vTelegram.getMe()
-      this.chats = await this.$vTelegram.getChats({
+      this.chats = await this.$vTelegram.searchChats({
         query: 'MANTIS',
         limit: 10
       })

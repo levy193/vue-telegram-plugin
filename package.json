@@ -8,6 +8,9 @@
   "scripts": {
     "test": "vue-cli-service serve ./test"
   },
+  "keywords": [
+    "vue", "telegram", "vue-telegram", "vuetelegram", "telegram client"
+  ],
   "dependencies": {},
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",

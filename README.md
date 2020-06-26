@@ -61,6 +61,7 @@ Method                    | Params                              | Descroption
 `getMe`                   |                                     | Get logged user information
 `searchChats`             | {</br> &nbsp;&nbsp;query(String), &nbsp;&nbsp;limit(Number)</br>}    | Search chat's title match query with `limit` results
 `sendMessage`             | { </br> &nbsp;&nbsp;chatId(String), &nbsp;&nbsp;message(String) </br>} | Send `message` to chat with `chatId`
+`logout`                  |                                     | Logout user
 
 
 #### Available events

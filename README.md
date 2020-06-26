@@ -36,9 +36,9 @@ Vue.use(VueTelgram, options)
 
 Name                  | Data Type   | Descroption
 --------------------- | ----------- | -----------
-`useTestDC`           | Boolean           | If set to true, the Telegram test environment will be used instead of the production environment. Default: true
-`logVerbosityLevel`   | Number            | The initial verbosity level for the TDLib internal logging (0-1023). Default: 1
-`jsLogVerbosityLevel` | Number            | The initial verbosity level of the JavaScript part of the code. Default: 3
+`useTestDC`           | Boolean           | If set to true, the Telegram test environment will be used instead of the production environment. Default: `true`
+`logVerbosityLevel`   | Number            | The initial verbosity level for the TDLib internal logging (0-1023). Default: `1`
+`jsLogVerbosityLevel` | Number            | The initial verbosity level of the JavaScript part of the code. Default: `3`
 `useDatabase`         | Boolean           | Default: false. If set to true, the library will maintain a cache of users, basic groups, supergroups, channels and secret chats.
 `apiId`               | String(required)  | Application identifier for Telegram API access, which can be obtained at https://my.telegram.org.
 `apiHash`             | String(required)  | Application identifier hash for Telegram API access, which can be obtained at https://my.telegram.org.
